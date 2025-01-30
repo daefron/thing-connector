@@ -53,9 +53,10 @@ export function Main() {
                 <p className="error">{error}</p>
               </>
             ) : null}{" "}
-            <form className="userInput" onSubmit={formSubmit}>
+            <form name="mainInput" className="userInput" onSubmit={formSubmit}>
               <input
                 type="text"
+                name="userInput"
                 onChange={inputChange}
                 placeholder={placeholderText}
                 value={error && inputText ? inputText : undefined}
