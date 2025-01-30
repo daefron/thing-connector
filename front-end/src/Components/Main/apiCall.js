@@ -2,6 +2,8 @@ async function dataOrError(response, setError) {
   if (!response.ok) {
     if (response.status === 503) {
       setError("the model is overloaded, please try again later.");
+    } else {
+      setError("could not connect to model");
     }
     throw new Error(response);
   } else {
