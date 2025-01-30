@@ -11,6 +11,8 @@ async function postData(req, res) {
   const prompt = aiConfig.prompt + userInput;
   const result = await model.generateContent(prompt);
   console.log(JSON.parse(result.response.text()));
+  const parsedResult = JSON.parse(result.response.text());
+  res.json({ result: parsedResult });
 }
 
 module.exports = {

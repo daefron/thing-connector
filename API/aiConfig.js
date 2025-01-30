@@ -11,8 +11,8 @@ const schema = {
         nullable: false,
       },
       percentage: {
-        type: SchemaType.INTEGER,
-        description: "Strength of connection in percentage",
+        type: SchemaType.STRING,
+        description: "Strength of connection in form of percentage",
         nullable: false,
       },
       explanation: {
@@ -32,7 +32,7 @@ const model = {
   },
 };
 
-const key = "key hidden";
+const key = "hidden key";
 
 const prompt =
   "Give me the top 10 shared connection between the following things (considering all variants of the words, showing percentage for each connection's strength and explanation of each connection): ";
