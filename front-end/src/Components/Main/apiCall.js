@@ -23,7 +23,7 @@ export async function apiCall(
     input = placeholderText;
   }
   setLoading(true);
-  fetch("http://localhost:3000/data", {
+  fetch("https://word-connector.onrender.com/data", {
     method: "POST",
     body: "userInput=" + input,
     headers: {
