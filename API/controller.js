@@ -19,6 +19,7 @@ async function postData(req, res) {
       console.log("Getting request with input: '" + userInput + "'");
       result = await model.generateContent(prompt);
     } catch (e) {
+      attempts++;
       console.log("Error: " + e.status);
       if (attempts < maxAttempts) {
         return tryGenerate();
@@ -26,7 +27,7 @@ async function postData(req, res) {
       return res.status(e.status).send({ message: e.status });
     }
   }
-  
+
   const parsedResult = JSON.parse(result.response.text());
   console.log("Sent result for: '" + userInput + "'");
   return res.json({ result: parsedResult });
