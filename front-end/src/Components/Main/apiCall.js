@@ -23,24 +23,34 @@ export async function apiCall(
     input = placeholderText;
   }
   setLoading(true);
-  fetch("https://word-connector.onrender.com/data", {
-    method: "POST",
-    body: "userInput=" + input,
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  })
-    .then((res) => {
-      return dataOrError(res, setError);
+  const maxAttempts = 5;
+  let attempts = 0;
+  fetchAttempt();
+  async function fetchAttempt() {
+    fetch("https://word-connector.onrender.com/data", {
+      method: "POST",
+      body: "userInput=" + input,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
     })
-    .catch((error) => {
-      return error;
-    })
-    .then((data) => {
-      setLoading(false);
-      if (data instanceof Error) {
-        return;
-      }
-      setConnectionData({ result: data.result, input: input });
-    });
+      .then((res) => {
+        return dataOrError(res, setError);
+      })
+      .catch((error) => {
+        return error;
+      })
+      .then((data) => {
+        setLoading(false);
+        if (data instanceof Error) {
+          attempts++;
+          if (attempts < maxAttempts) {
+            return fetchAttempt();
+          } else {
+            return;
+          }
+        }
+        setConnectionData({ result: data.result, input: input });
+      });
+  }
 }
