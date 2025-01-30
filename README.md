@@ -2,7 +2,7 @@
 
 ## About this project
 
-This is a tool that finds connections between words using AI, and ranks them.
+This is a tool that finds connections between things using AI, and ranks them.
 
 It's is a strange project, and about the only use case I have for this is to help with writing jokes or rap.
 
