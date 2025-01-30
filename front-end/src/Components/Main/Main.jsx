@@ -14,6 +14,7 @@ export function Main() {
   const [error, setError] = useState();
   const [connectionData, setConnectionData] = useState();
   useEffect(() => {
+    setInputText(false);
     setPlaceholderText(placeholderMaker());
   }, [connectionData]);
 
