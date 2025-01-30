@@ -53,8 +53,9 @@ input {
   text-align: left;
 }
 .explanation {
-  width: 100%;
+  width: min(80%, 350px);
   border-block: 1px solid;
+  margin-block: 5px;
 }
 .error {
   margin-bottom: 5px;

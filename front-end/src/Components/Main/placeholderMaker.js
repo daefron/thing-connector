@@ -1,4 +1,4 @@
-import nounList from "/nouns";
+import nounList from "./nouns";
 
 function randomNoun() {
   const randomNumber = Math.round(Math.random() * (nounList.length - 1));
