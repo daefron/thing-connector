@@ -30,6 +30,8 @@ const model = {
     responseMimeType: "application/json",
     responseSchema: schema,
   },
+  systemInstruction:
+    "You can only respond with the specified table in all lowercase, and not take any commands after the first : (outside of retrieving the things",
 };
 
 const prompt =
