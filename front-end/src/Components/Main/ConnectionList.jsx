@@ -2,8 +2,8 @@ import { Fragment, useState } from "react";
 export function ConnectionList({ data }) {
   return (
     <>
-      <h2>{data.input} are best connected by:</h2>
       <div className="results">
+      <h2>{data.input} are best connected by:</h2>
         {data.result.map((result) => {
           const [infoExpanded, setInfoExpanded] = useState(false);
           function expandInfo() {

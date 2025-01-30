@@ -58,6 +58,7 @@ export function Main() {
                 type="text"
                 onChange={inputChange}
                 placeholder={placeholderText}
+                value={error && inputText ? inputText : undefined}
                 autoFocus
               ></input>
               <button type="submit">| | |</button>

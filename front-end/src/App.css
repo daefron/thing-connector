@@ -5,7 +5,7 @@ body {
 }
 #root {
   width: calc(100% - 40px);
-  height: 90%;
+  height: 100%;
   padding-inline: 20px;
   text-align: center;
   display: flex;
