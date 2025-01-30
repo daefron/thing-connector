@@ -5,15 +5,14 @@ const aiConfig = require("./aiConfig");
 const genAI = new GoogleGenerativeAI(aiConfig.key);
 const model = genAI.getGenerativeModel(aiConfig.model);
 
-async function getData(req, res) {
-  //test input while frontend not built
-  const input = "desk, notepad";
-  console.log("Getting request with input: '" + input + "'");
-  const prompt = aiConfig.prompt + input;
+async function postData(req, res) {
+  const userInput = req.body.userInput;
+  console.log("Getting request with input: '" + userInput + "'");
+  const prompt = aiConfig.prompt + userInput;
   const result = await model.generateContent(prompt);
   console.log(JSON.parse(result.response.text()));
 }
 
 module.exports = {
-  getData,
+  postData,
 };

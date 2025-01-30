@@ -4,6 +4,6 @@ const mainRouter = Router();
 
 const mainController = require("./controller");
 
-mainRouter.get("/data", mainController.getData);
+mainRouter.post("/data", mainController.postData);
 
 module.exports = mainRouter;
