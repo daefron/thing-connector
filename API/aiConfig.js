@@ -37,6 +37,5 @@ const prompt =
 
 module.exports = {
   model,
-  key,
   prompt,
 };
