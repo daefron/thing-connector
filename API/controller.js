@@ -9,8 +9,13 @@ async function postData(req, res) {
   const userInput = req.body.userInput;
   console.log("Getting request with input: '" + userInput + "'");
   const prompt = aiConfig.prompt + userInput;
-  const result = await model.generateContent(prompt);
-  console.log(JSON.parse(result.response.text()));
+  let result;
+  try {
+    result = await model.generateContent(prompt);
+  } catch (e) {
+    console.log("Error: " + e.status);
+    return res.status(e.status).send({ message: e.status });
+  }
   const parsedResult = JSON.parse(result.response.text());
   res.json({ result: parsedResult });
 }

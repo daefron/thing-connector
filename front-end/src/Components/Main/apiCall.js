@@ -1,8 +1,20 @@
+async function dataOrError(response, setError) {
+  if (!response.ok) {
+    if (response.status === 503) {
+      setError("the model is overloaded, please try again later.");
+    }
+    throw new Error(response);
+  } else {
+    setError(false);
+    return response.json();
+  }
+}
 export async function apiCall(
   inputText,
   placeholderText,
   setConnectionData,
-  setLoading
+  setLoading,
+  setError
 ) {
   let input = inputText;
   if (!input) {
@@ -17,10 +29,16 @@ export async function apiCall(
     },
   })
     .then((res) => {
-      return res.json();
+      return dataOrError(res, setError);
+    })
+    .catch((error) => {
+      return error;
     })
     .then((data) => {
       setLoading(false);
+      if (data instanceof Error) {
+        return;
+      }
       setConnectionData({ result: data.result, input: input });
     });
 }

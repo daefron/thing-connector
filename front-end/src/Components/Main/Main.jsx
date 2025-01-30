@@ -12,6 +12,7 @@ export function Main() {
   const [inputText, setInputText] = useState();
   const [placeholderText, setPlaceholderText] = useState(placeholderMaker());
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
   const [connectionData, setConnectionData] = useState();
   useEffect(() => {
     setPlaceholderText(placeholderMaker());
@@ -20,6 +21,16 @@ export function Main() {
   function inputChange(e) {
     setInputText(e.target.value);
   }
+  const buttonClick = (e) => {
+    e.preventDefault();
+    apiCall(
+      inputText,
+      placeholderText,
+      setConnectionData,
+      setLoading,
+      setError
+    );
+  };
 
   return (
     <main>
@@ -37,24 +48,19 @@ export function Main() {
       ) : (
         <>
           <div className="inputDiv">
-            <form
-              className="userInput"
-              onSubmit={() =>
-                apiCall(
-                  inputText,
-                  placeholderText,
-                  setConnectionData,
-                  setLoading
-                )
-              }
-            >
+            {error ? (
+              <>
+                <p className="error">{error}</p>
+              </>
+            ) : null}{" "}
+            <form className="userInput" onSubmit={buttonClick}>
               <input
                 type="text"
                 onChange={inputChange}
                 placeholder={placeholderText}
                 autoFocus
               ></input>
-              <button>| | |</button>
+              <button type="submit">| | |</button>
             </form>
             <p>enter any amount of things, separated by commas</p>
           </div>

@@ -1,6 +1,5 @@
 import { Fragment, useState } from "react";
 export function ConnectionList({ data }) {
-  console.log(data);
   return (
     <>
       <h2>{data.input} are best connected by:</h2>
@@ -8,8 +7,7 @@ export function ConnectionList({ data }) {
         {data.result.map((result) => {
           const [infoExpanded, setInfoExpanded] = useState(false);
           function expandInfo() {
-            setInfoExpanded(true);
-            console.log("test");
+            setInfoExpanded(!infoExpanded);
           }
           return (
             <Fragment key={result.connection + "result"}>
