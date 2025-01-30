@@ -2,7 +2,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const aiConfig = require("./aiConfig");
 
-const genAI = new GoogleGenerativeAI(aiConfig.process.env.KEY);
+const genAI = new GoogleGenerativeAI(process.env.KEY);
 const model = genAI.getGenerativeModel(aiConfig.model);
 
 async function postData(req, res) {
