@@ -44,6 +44,9 @@ input {
   flex-direction: column;
   align-items: center;
 }
+.results > h2 {
+  margin-bottom: 5px;
+}
 .result {
   width: min(80%, 350px);
   display: grid;
