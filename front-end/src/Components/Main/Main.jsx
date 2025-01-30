@@ -1,6 +1,5 @@
 import "./Main.css";
 import { useState, useEffect } from "react";
-
 import { ScaleLoader } from "react-spinners";
 
 import { placeholderMaker } from "./placeholderMaker";
@@ -21,7 +20,7 @@ export function Main() {
   function inputChange(e) {
     setInputText(e.target.value);
   }
-  const buttonClick = (e) => {
+  const formSubmit = (e) => {
     e.preventDefault();
     apiCall(
       inputText,
@@ -53,7 +52,7 @@ export function Main() {
                 <p className="error">{error}</p>
               </>
             ) : null}{" "}
-            <form className="userInput" onSubmit={buttonClick}>
+            <form className="userInput" onSubmit={formSubmit}>
               <input
                 type="text"
                 onChange={inputChange}
