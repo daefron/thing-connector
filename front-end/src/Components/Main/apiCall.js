@@ -21,6 +21,6 @@ export async function apiCall(
     })
     .then((data) => {
       setLoading(false);
-      setConnectionData(data.result);
+      setConnectionData({ result: data.result, input: input });
     });
 }
