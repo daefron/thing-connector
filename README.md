@@ -12,7 +12,7 @@ I've found that it is better at producing left-field connections than standard o
 
 ## Why this project
 
-I just kind of wanted to mess around with AI a bunch. I thought of this in the morning and wanted to see if I could build it in a day. I did :)
+Truth be told, I just kind of wanted to mess around with AI a bunch.
 
 ### Built With:
 
