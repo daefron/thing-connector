@@ -7,7 +7,11 @@ export function ConnectionList({ data }) {
         <h2>{data.input} are best connected by:</h2>
         {data.result.map((result) => {
           function expandInfo() {
-            setInfoExpanded(data.result.indexOf(result));
+            if (infoExpanded === data.result.indexOf(result)) {
+              setInfoExpanded(false);
+            } else {
+              setInfoExpanded(data.result.indexOf(result));
+            }
           }
           return (
             <Fragment key={result.connection + "result"}>
