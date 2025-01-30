@@ -15,9 +15,14 @@ body {
 p,
 label,
 input,
+button,
 h1,
 h2,
 h3 {
   margin: 0;
   color: black;
+}
+input,
+button {
+  background-color: rgb(255, 252, 244);
 }
