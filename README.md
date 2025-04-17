@@ -1,4 +1,4 @@
-## [Live site here](https://thingconnector.netlify.app)
+## [Live site here](https://thing.thomasevans.org)
 
 ## About this project
 
