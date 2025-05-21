@@ -1,0 +1,48 @@
+name: Build and push Docker image to Azure
+
+on: [push]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-push-to-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout GitHub action"
+        uses: actions/checkout@v4
+
+      - name: Login to Docker hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Build and push image
+        run: |
+          docker build -t daefron/thing-connector:latest .
+          docker push daefron/thing-connector:latest
+  deploy-image-to-azure:
+    needs: build-and-push-to-docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Configure Azure web app to use Docker image
+        run: |
+          az webapp config container set \
+            --name thing-connector \
+            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP}} \
+            --container-image-name daefron/thing-connector:latest \
+            --container-registry-url https://index.docker.io \
+            --container-registry-user ${{ secrets.DOCKER_HUB_USERNAME }} \
+            --container-registry-password ${{ secrets.DOCKER_HUB_PASSWORD }}
+      - name: Restart Azure Web App
+        run: |
+          az webapp restart --name thing-connector --resource-group ${{ secrets.AZURE_RESOURCE_GROUP}}
