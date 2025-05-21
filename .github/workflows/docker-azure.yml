@@ -28,6 +28,21 @@ jobs:
     needs: build-and-push-to-docker
     runs-on: ubuntu-latest
     steps:
+      - name: Get OIDC token
+        id: oidc
+        run: |
+          echo "::set-output name=token::$(curl -fsSL \
+            -H \"Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN\" \
+            $ACTIONS_ID_TOKEN_REQUEST_URL)"
+        env:
+          ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ secrets.AZURE_CLIENT_ID }}
+          ACTIONS_ID_TOKEN_REQUEST_URL: ${{ steps.oidc.outputs.url }}
+
+      - name: Decode OIDC token
+        run: |
+          echo "${{ steps.oidc.outputs.token }}" | \
+            awk -F'.' '{print $2}' | base64 --decode | jq .
+
       - name: Azure login
         uses: azure/login@v2
         with:
@@ -44,7 +59,7 @@ jobs:
             --container-registry-url https://index.docker.io \
             --container-registry-user ${{ secrets.DOCKER_HUB_USERNAME }} \
             --container-registry-password ${{ secrets.DOCKER_HUB_PASSWORD }}
-            
+
       - name: Restart Azure Web App
         run: |
           az webapp restart --name thing-connector --resource-group ${{ secrets.AZURE_RESOURCE_GROUP}}
