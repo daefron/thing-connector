@@ -27,7 +27,7 @@ export async function apiCall(
   let attempts = 0;
   fetchAttempt();
   async function fetchAttempt() {
-    fetch("https://word-connector.onrender.com/data", {
+    fetch("https://thing-connector-cshjbkhkhsazfpaj.australiasoutheast-01.azurewebsites.net/data", {
       method: "POST",
       body: "userInput=" + input,
       headers: {
