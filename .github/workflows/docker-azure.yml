@@ -23,6 +23,7 @@ jobs:
         run: |
           docker build -t daefron/thing-connector:latest .
           docker push daefron/thing-connector:latest
+
   deploy-image-to-azure:
     needs: build-and-push-to-docker
     runs-on: ubuntu-latest
@@ -43,6 +44,7 @@ jobs:
             --container-registry-url https://index.docker.io \
             --container-registry-user ${{ secrets.DOCKER_HUB_USERNAME }} \
             --container-registry-password ${{ secrets.DOCKER_HUB_PASSWORD }}
+            
       - name: Restart Azure Web App
         run: |
           az webapp restart --name thing-connector --resource-group ${{ secrets.AZURE_RESOURCE_GROUP}}
